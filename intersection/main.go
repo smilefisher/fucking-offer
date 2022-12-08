@@ -30,6 +30,31 @@ func main() {
 		},
 	}
 
+	//收尾相接
+	f2 := func(l1, l2 *ListNode) *ListNode {
+
+		//l1的尾巴，接到l2的头上
+		p1, p2 := l1, l2
+		var tail1 = p1
+		for tail1.Next != nil {
+			tail1 = tail1.Next
+		}
+		tail1.Next = p2 //p1的尾巴，接到p2
+
+		fast, slow := p1, p2
+
+		for fast != nil && fast.Next != nil && slow != nil {
+			if fast == slow {
+				return fast
+			}
+			fast = fast.Next.Next
+			slow = slow.Next
+		}
+		return nil
+	}
+
+	fmt.Println(f2(l1, L2))
+
 	fc := func(l1, l2 *ListNode) *ListNode {
 		p1, p2 := l1, l2
 
