@@ -39,6 +39,7 @@ func main() {
 	levelTraverse(node)
 }
 
+//recursive 递归 ，前序，中序，后续
 func recursive(node *TreeNode) {
 	if node == nil {
 		return
@@ -50,7 +51,7 @@ func recursive(node *TreeNode) {
 	fmt.Println(node.data) //后续遍历
 }
 
-
+//水平遍历 用到堆
 func levelTraverse(node *TreeNode) {
 	var queen = make(chan *TreeNode, 10)
 	queen <- node
