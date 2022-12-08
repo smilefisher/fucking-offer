@@ -8,11 +8,11 @@ type LinkedNode struct {
 }
 
 func main() {
-	head :=  &LinkedNode{}
+	head := &LinkedNode{}
 	*head = LinkedNode{
 		Data: 1,
-		Next:  &LinkedNode{
-			Next:  &LinkedNode{
+		Next: &LinkedNode{
+			Next: &LinkedNode{
 				Next: head,
 				Data: 3,
 			},
@@ -21,7 +21,6 @@ func main() {
 	}
 	fmt.Println(circle(head))
 }
-
 
 func circle(head *LinkedNode) bool {
 	var fast, slow = head, head
