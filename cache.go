@@ -66,11 +66,12 @@ func (l *LogCache) FetchData(ctx context.Context, record *[]LogRecord) (err erro
 	*record = (*record)[0:0]
 	l.Cond.L.Lock()
 	for len(l.Data) == 0 {
-		l.Cond.Wait()
+		//放在之前可以防止ExistWorkerBroadCase时，正在工作的线程无法收到广播，一直阻塞在wait
 		if atomic.LoadInt32(l.ExistFlag) != 0 {
 			l.Cond.L.Unlock()
 			return ExistErr
 		}
+		l.Cond.Wait()
 	}
 	//fmt.Printf("%p \n ",l.Data)
 	length := len(l.Data)
